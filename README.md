@@ -10,10 +10,11 @@ Slack Bot Template using slack-api/bolt-js
 
 ## Dev Work-In-Progress - Next Steps:
 
-- Get a basic hello-world / message response working.
-- Set up a config folder with any static configs as json (url, port, etc)
-- Set up the app to be able to load the config into an object
+- Solve slash command ack() timeout issue.
+- Get messages from direct chat working (channel is the bot channel)
+- Add logging lib and refine logs (add logging level option to config)
 - Add a basic Dockerfile to build the app
+- Build out a commands module example
 
 ## App Scopes/Permissions Required in Workspace App Config
 Info: https://api.slack.com/scopes
