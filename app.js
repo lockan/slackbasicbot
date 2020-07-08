@@ -22,14 +22,14 @@ app.event("app_mention", async ({event, say}) => {
 });
 
 //app.command(commandName, fn);
-app.command("helpme", async ({command, ack, say}) => {
-    ack();
+app.command("/helpme", async ({command, ack, say}) => {
+    await ack();
     console.log(command);
     say("What is your command?");
 });
 
 // General case error handler.
-app.error(async(error) => {
+app.error(async (error) => {
     console.error(error);
 });
 
