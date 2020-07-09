@@ -1,3 +1,4 @@
 {
-    "listenport" : 5555
+    "listenport" : 5555,
+    "loglevel" : "debug"
 }
