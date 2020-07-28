@@ -4,6 +4,9 @@ const { App, LogLevel, subtype, ReceiverMultipleAckError } = require("@slack/bol
 //Load config from config.json
 const appConfig = require("./config/config.json");
 
+//Load modules
+const commands = require("./commands/");
+const messages = require("./messages/");
 
 const app = new App({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -22,7 +25,7 @@ function initLogging(app, appConfig) {
 }
 
 // STUB for reference purposes.
-//Respond to all messages
+// Respond to all messages
 // app.message(async ({message, say}) => {
 //      console.log(message);
 //      say("I hear all!");
@@ -38,10 +41,12 @@ app.event("app_mention", async ({event, say}) => {
 // TODO
 
 //app.command(commandName, fn);
+//TODO: move internals into ./commands/helpme.js
 app.command("/helpme", async ({command, ack, say}) => {
     await ack();
     console.log(command);
-    say("What is your command?");
+    //say("What is your command?");
+    commands.helpme(say);
 });
 
 // General case error handler.
