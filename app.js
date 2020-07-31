@@ -6,7 +6,6 @@ const appConfig = require("./config/config.json");
 
 //Load modules
 const commands = require("./commands/");
-const messages = require("./messages/");
 
 const app = new App({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
