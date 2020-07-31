@@ -35,6 +35,7 @@ function initLogging(app, appConfig) {
 app.event("app_mention", async ({event, say}) => {
     console.log(event);
     say("You summoned me?")
+    //TODO: Does this respond to any mention, or just to bot mentions?
 });
 
 //Respond to private DMs
@@ -46,7 +47,7 @@ app.command("/helpme", async ({command, ack, say}) => {
     await ack();
     console.log(command);
     //say("What is your command?");
-    commands.helpme(say);
+    commands.HelpMe(command, say);
 });
 
 // General case error handler.
@@ -58,8 +59,7 @@ app.error(async (error) => {
 (async () => {
     // Init
     initLogging(app, appConfig);
-    // Start your app
+    // Start app
     await app.start(appConfig.listenport || process.env.SLACK_BOT_PORT);
-
     app.logger.info(`SlackBasicBot is listening on port ${appConfig.listenport}!`);
 })();

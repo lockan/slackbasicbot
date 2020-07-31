@@ -7,12 +7,10 @@ Slack Bot Template using slack-api/bolt-js
 - Slack Bolt Framework: https://github.com/slackapi/bolt-js
 - Slack Events API: https://api.slack.com/events
 
-
 ## Dev Work-In-Progress - Next Steps:
 
 - Get messages from direct chat working (channel is the bot channel)
-- Build out a commands module example
-- Add a basic Dockerfile to build the app
+- Add a basic Dockerfile to build the app -- use the nodejs alpine image as base
 
 ## App Scopes/Permissions Required in Workspace App Config
 Info: https://api.slack.com/scopes

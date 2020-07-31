@@ -1,9 +1,7 @@
-// Command definitions and responses
-function helpme(say) {
-    say("I am helping!");
-};
+// Reminder: all supported commands must also be configured in Slack Bot Management console
+const helpme = require("./helpme.js");
 
-// Export commands
+// Export commands as function bindings
 module.exports = {
-    helpme : (say) => { helpme(say) }
+    HelpMe : (command, say) => helpme(command, say)
 };
