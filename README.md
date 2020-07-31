@@ -9,8 +9,8 @@ Slack Bot Template using slack-api/bolt-js
 
 ## Dev Work-In-Progress - Next Steps:
 
+- Verify that bot is only responding to direct messages to the bot, else fix.
 - Get messages from direct chat working (channel is the bot channel)
-- Add a basic Dockerfile to build the app -- use the nodejs alpine image as base
 
 ## App Scopes/Permissions Required in Workspace App Config
 Info: https://api.slack.com/scopes
