@@ -27,20 +27,20 @@ function initLogging(app, appConfig) {
 // Respond to all messages
 /**
 app.message(async ({message, say}) => {
-      console.log(message);
+      app.logger.debug(message);
       say("I hear all!");
 });
 */
 
 //Respond to bot mentions
 app.event("app_mention", async ({event, say}) => {
-    console.log(event);
+    app.logger.debut(event);
     say("You summoned me?")
 });
 
 //Respond to private IMs
 app.message(async ({message, say}) => {
-    console.log(message);
+    app.logger.debug(message);
     if (message.channel_type == "im" || message.channel_type == "app_home") {
         say("Responding to an IM!");
     }
@@ -49,13 +49,13 @@ app.message(async ({message, say}) => {
 //app.command(commandName, fn);
 app.command("/helpme", async ({command, ack, say}) => {
     await ack();
-    console.log(command);
+    app.logger.debug(command);
     commands.HelpMe(command, say);
 });
 
 // General case error handler.
 app.error(async (error) => {
-    console.error(error);
+    app.logger.error(error);
 });
 
 // ===== Start the Bot. =====

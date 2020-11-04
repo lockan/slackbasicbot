@@ -1,4 +1,4 @@
 {
     "listenport" : 5555,
-    "loglevel" : "debug"
+    "loglevel" : "info"
 }
