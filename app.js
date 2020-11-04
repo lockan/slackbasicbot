@@ -25,27 +25,31 @@ function initLogging(app, appConfig) {
 
 // STUB for reference purposes.
 // Respond to all messages
-// app.message(async ({message, say}) => {
-//      console.log(message);
-//      say("I hear all!");
-// });
+/**
+app.message(async ({message, say}) => {
+      console.log(message);
+      say("I hear all!");
+});
+*/
 
-//Respond to mentions
+//Respond to bot mentions
 app.event("app_mention", async ({event, say}) => {
     console.log(event);
     say("You summoned me?")
-    //TODO: Does this respond to any mention, or just to bot mentions?
 });
 
-//Respond to private DMs
-// TODO
+//Respond to private IMs
+app.message(async ({message, say}) => {
+    console.log(message);
+    if (message.channel_type == "im" || message.channel_type == "app_home") {
+        say("Responding to an IM!");
+    }
+});
 
 //app.command(commandName, fn);
-//TODO: move internals into ./commands/helpme.js
 app.command("/helpme", async ({command, ack, say}) => {
     await ack();
     console.log(command);
-    //say("What is your command?");
     commands.HelpMe(command, say);
 });
 
