@@ -1,20 +1,68 @@
 // Require the Bolt package (github.com/slackapi/bolt)
-const { App } = require("@slack/bolt");
+const { App, LogLevel, subtype, ReceiverMultipleAckError } = require("@slack/bolt");
+
+//Load config from config.json
+const appConfig = require("./config/config.json");
+
+//Load modules
+const commands = require("./commands/");
 
 const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET
+    signingSecret: process.env.SLACK_SIGNING_SECRET,
+    token: process.env.SLACK_BOT_TOKEN,
+    logLevel: LogLevel.INFO, // Will be overridden by config.json when app is initialized.
 });
 
+function initLogging(app, appConfig) {
+    console.log("appConfig.loglevel: %s", appConfig.loglevel);
+    if ( appConfig.loglevel == "" || appConfig.loglevel === undefined) {
+        console.log("No log level setting was found in config.json. Using default.");
+    } else {
+        app.logger.setLevel(appConfig.loglevel.toLowerCase());
+        console.log("App log level set to %s", app.logger.getLevel());
+    }
+}
 
+// STUB for reference purposes.
+// Respond to all messages
+/**
+app.message(async ({message, say}) => {
+      app.logger.debug(message);
+      say("I hear all!");
+});
+*/
 
-// All the room in the world for your code
+//Respond to bot mentions
+app.event("app_mention", async ({event, say}) => {
+    app.logger.debut(event);
+    say("You summoned me?")
+});
 
+//Respond to private IMs
+app.message(async ({message, say}) => {
+    app.logger.debug(message);
+    if (message.channel_type == "im" || message.channel_type == "app_home") {
+        say("Responding to an IM!");
+    }
+});
 
+//app.command(commandName, fn);
+app.command("/helpme", async ({command, ack, say}) => {
+    await ack();
+    app.logger.debug(command);
+    commands.HelpMe(command, say);
+});
 
+// General case error handler.
+app.error(async (error) => {
+    app.logger.error(error);
+});
+
+// ===== Start the Bot. =====
 (async () => {
-  // Start your app
-  await app.start(process.env.PORT || 4000);
-
-  console.log('⚡️ Bolt app is running!');
+    // Init
+    initLogging(app, appConfig);
+    // Start app
+    await app.start(appConfig.listenport || process.env.SLACK_BOT_PORT);
+    app.logger.info(`SlackBasicBot is listening on port ${appConfig.listenport}!`);
 })();

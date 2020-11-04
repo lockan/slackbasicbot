@@ -4,14 +4,12 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "wintest" : "testbot.bat",
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-
+    "start": "node app.js"
   },
   "author": "A.Lockhart",
   "license": "ISC",
   "dependencies": {
-    "@slack/bolt": "^2.1.1"
+    "@slack/bolt": "^2.1.1",
+    "npm": "^6.14.5"
   }
 }

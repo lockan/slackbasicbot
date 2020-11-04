@@ -7,10 +7,25 @@ Slack Bot Template using slack-api/bolt-js
 - Slack Bolt Framework: https://github.com/slackapi/bolt-js
 - Slack Events API: https://api.slack.com/events
 
+## App Scopes/Permissions Required in Workspace App Config
+Info: https://api.slack.com/scopes
+Legacy: https://api.slack.com/legacy/oauth-scopes
 
-## Dev Work-In-Progress - Next Steps:
+Configure app scopes at: https://api.slack.com/apps/
 
-- Get a basic hello-world / message response working.
-- Set up a config folder with any static configs as json (url, port, etc)
-- Set up the app to be able to load the config into an object
-- Add a basic Dockerfile to build the app
+app_mentions:read
+channels:history
+chat:write
+commands
+im:history
+im:write
+
+Subscribe bot to the following Events:
+app_mention
+message.channels
+message.im
+
+## TO RUN:
+SLACK_BOT_TOKEN={bot-oauth-token}
+SLACK_SIGNING_SECRET={bot-signing-secret}
+nodejs ...
